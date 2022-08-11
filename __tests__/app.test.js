@@ -21,19 +21,19 @@ describe('why-i-autha routes', () => {
   });
 
 
-  // it('should login and redirect users to /api/v1/github/dashboard', async () => {
-  //   const res = await request
-  //     .agent(app)
-  //     .get('/api/v1/github/callback?code=42')
-  //     .redirects(1);
+  it('should login and redirect users to /api/v1/github/dashboard', async () => {
+    const res = await request
+      .agent(app)
+      .get('/api/v1/github/callback?code=42')
+      .redirects(1);
 
-  //   expect(res.body).toEqual({
-  //     id: expect.any(String),
-  //     username: 'test_user',
-  //     email: 'abc@123.com',
-  //     avatar: expect.any(String),
-  //     iat: expect.any(Number),
-  //     exp: expect.any(Number),
-  //   });
-  // });
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      username: 'test_user',
+      email: 'abc@123.com',
+      avatar: expect.any(String),
+      iat: expect.any(Number),
+      exp: expect.any(Number),
+    });
+  });
 });
