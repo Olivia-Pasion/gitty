@@ -14,19 +14,25 @@ describe('why-i-autha routes', () => {
     pool.end();
   });
 
-  it('should login and redirect users to /api/v1/github/dashboard', async () => {
-    const res = await request
-      .agent(app)
-      .get('/api/v1/github/callback?code=42')
-      .redirects(1);
-
-    expect(res.body).toEqual({
-      id: expect.any(String),
-      username: 'test_user',
-      email: 'abc@123.com',
-      avatar: expect.any(String),
-      iat: expect.any(Number),
-      exp: expect.any(Number),
-    });
+  it('should redirect to github oauth page upon login', async () => {
+    const res = await request(app).get('/api/v1/github/login');
+    console.log(res.header.location);
+    expect(res.header.location).toEqual(expect.any(String));
   });
+
+  // it('should login and redirect users to /api/v1/github/dashboard', async () => {
+  //   const res = await request
+  //     .agent(app)
+  //     .get('/api/v1/github/callback?code=42')
+  //     .redirects(1);
+
+  //   expect(res.body).toEqual({
+  //     id: expect.any(String),
+  //     username: 'test_user',
+  //     email: 'abc@123.com',
+  //     avatar: expect.any(String),
+  //     iat: expect.any(Number),
+  //     exp: expect.any(Number),
+  //   });
+  // });
 });
