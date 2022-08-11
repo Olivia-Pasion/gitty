@@ -36,4 +36,13 @@ describe('why-i-autha routes', () => {
       exp: expect.any(Number),
     });
   });
+  
+  it.only('#DELETE should sign out a user, redirect to /api/v1/github/sessions', async () => {
+    const resp = await request(app).delete('/api/v1/github/sessions');
+    console.log(resp.body);
+    expect(resp.status).toBe(200);
+
+    const gitResp = await request(app).get('/api/v1/github/sessions');
+    expect(gitResp.status).toBe(404);
+  });
 });
