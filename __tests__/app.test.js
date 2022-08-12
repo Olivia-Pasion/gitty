@@ -37,7 +37,7 @@ describe('why-i-autha routes', () => {
     });
   });
   
-  it.only('#DELETE should sign out a user, redirect to /api/v1/github/sessions', async () => {
+  it('#DELETE should sign out a user, redirect to /api/v1/github/sessions', async () => {
     const resp = await request(app).delete('/api/v1/github/sessions');
     console.log(resp.body);
     expect(resp.status).toBe(200);
