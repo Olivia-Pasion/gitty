@@ -28,6 +28,17 @@ describe('post routes', () => {
     });
   });
 
+  it('#POST users should be able to add a post to the table', async () => {
+    await agent.get('/api/v1/github/login');
+    const res = agent.post('/api/v1/posts').send({ title: 'New Post', content: 'This is from the new post test' });
+    expect(res.body).toEqual({
+      id: expect.any(String),
+      title: expect.any(String),
+      content: expect.any(String),
+      gh_user_id: expect.any(String)
+    });
+  });
+
 
 });
 
