@@ -19,8 +19,13 @@ describe('post routes', () => {
   it('#GET /api/v1/posts shows all posts for users', async () => {
     await agent.get('/api/v1/github/login');
     const res = agent.get('/api/v1/posts');
-    console.log(res.header.location);
-    expect(res.header.location).toMatch(/https:\/\/github.com\/login\/oauth\/authorize\?client_id[\w\d]+&scope=user&redirect_uri=http:\/\/localhost:7890\/api\/v1\/posts/i);
+    expect(res.body.length).toEqual(2);
+    console.log(res.body[0]);
+    expect(res.body[0]).toEqual({
+      id: expect.any(String),
+      title: expect.any(String),
+      content: expect.any(String),
+    });
   });
 
 
